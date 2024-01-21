@@ -29,7 +29,7 @@ def wlan_man():
     if option == "0":
         print("Exiting")
     elif option == "wlan0":
-        net_iface.setup_man()
+        net_iface.setup_man("wlan0")
 
         time.sleep(2)
     elif option == "2":
