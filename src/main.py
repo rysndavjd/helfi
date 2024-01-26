@@ -13,6 +13,7 @@ run = True
 def menu():
     os.system("clear")
     print("")
+    print("[h] Help menu")
     print("[1] Setup WLAN manual")
     print("[2] Setup WLAN auto")
     print("[0] Exit")
@@ -22,7 +23,7 @@ def start():
     menu()
     option = input("Enter your choice: ")
     
-    while option not in ["0", "1", "2"]:
+    while option not in ["h", "H", "0", "1", "2"]:
         print("Not a valid input, please try again.")
         time.sleep(1)
         menu()
@@ -30,7 +31,9 @@ def start():
 
 
     while option != "999":
-            if option == "0":
+            if option == "h" or option == "H":
+                break
+            elif option == "0":
                 exit(0)
             elif option == "1":
                 if net_iface.exists("wlan") == "None":

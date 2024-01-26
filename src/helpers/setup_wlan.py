@@ -18,15 +18,17 @@ import helpers.net_iface as net_iface
 def wlan_man():
     #menu()
     subprocess.run("ifconfig")
-    print("Choose a interface to setup. (0 to exit menu)")
+    print("Choose a interface to setup. (0 to exit, h for help)")
     option = input("Enter your choice: ")
 
-    while option not in ["0", "wlan0", "wlan1"]:
+    while option not in ["h", "H", "0", "wlan0", "wlan1"]:
         print("Not a valid input, please try again.")
         #menu()
         option = input("Enter your choice: ")
 
-    if option == "0":
+    if option == "h" or option == "H":
+        pass
+    elif option == "0":
         print("Exiting")
     elif option == "wlan0":
         net_iface.setup_man("wlan0")

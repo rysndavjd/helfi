@@ -16,8 +16,21 @@ def exists(iface):
         return iface
     
 
-def mode(iface):
-    pass
+def set_mode(mode, iface):
+    if mode == "monitor":
+        subprocess.run(["airmon-ng", "check", "kill"])
+        subprocess.run(["airmon-ng", "start", iface])
+    elif mode == "ap":
+        pass
+    elif mode == "managed":
+        subprocess.run(["ifconfig", "-s", iface, "down"])
+        subprocess.run(["iwconfig", iface, "mode", "managed"])
+        subprocess.run(["ifconfig", "-s", iface, "up"])
+
+
+
+def check_mode(iface):
+    subprocess.run([])
 
 def setup_auto():
 
