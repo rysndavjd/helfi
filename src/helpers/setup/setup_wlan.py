@@ -27,7 +27,8 @@ def wlan_man():
         option = input("Enter your choice: ")
 
     if option == "h" or option == "H":
-        pass
+    
+        wlan_man()
     elif option == "0":
         print("Exiting")
     elif option == "wlan0":
