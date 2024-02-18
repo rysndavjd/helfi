@@ -3,10 +3,10 @@
 #python libs
 import time
 import os
+import signal
 
 #local libs
-import helpers.setup.setup_wlan as setup_wlan
-import helpers.net_iface as net_iface
+import helpers.setup
 
 run = True
 
@@ -32,27 +32,27 @@ def start():
         option = input("Enter your choice: ")
 
 
-    while option != "999":
+    while run:
             if option == "h" or option == "H":
                 break
             elif option == "0" or option == "q" or option == "Q":
                 exit(0)
             elif option == "1":
-                if net_iface.exists("wlan") == "None":
-                    print("There seems to be no WLAN interfaces available.")
-                    print("Exiting")
-                    time.sleep(1)
-                else:
-                    setup_wlan.wlan_man()
-                break
+                helpers.setup.setup()
+                start()
             elif option == "2":
                 pass
             else:
-                print("Error #1")
+                print("Error #main.py")
                 break
 
+def signal_handler(sig, frame):
+    print('You pressed Ctrl+C!')
+    exit(0)
 
-while run == True:
+if os.geteuid() == 0:
+    signal.signal(signal.SIGINT, signal_handler)
     start()
-
-
+    
+else:
+    print("Please run as root.")

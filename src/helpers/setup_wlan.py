@@ -3,16 +3,7 @@
 import time
 import subprocess
 import re 
-import helpers.net_iface as net_iface
-
-
-#def menu():
-#    os.system("clear")
-#    print("")
-#    print("[1] Choose WLAN")
-#    print("[2] Check WLAN mode")
-#    print("[0] Return")
-#    print("")
+import net_iface
 
 
 def wlan_man():
