@@ -53,6 +53,5 @@ def signal_handler(sig, frame):
 if os.geteuid() == 0:
     signal.signal(signal.SIGINT, signal_handler)
     start()
-    
 else:
     print("Please run as root.")

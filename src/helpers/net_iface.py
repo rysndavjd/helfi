@@ -11,24 +11,28 @@ def exists(iface):
     result = str(check.search(str(iwconfig.stdout)))
 
     if result == "None":
-        return "None"
+        return False
     else:
         return iface
     
 def lists():
     wlan = []
-    for i in range(10):
+    for i in range(0,9):
         if exists("wlan"+str(i)) == "wlan"+str(i):
             wlan.append(exists("wlan"+str(i)))
-
+    for i in range(0,9):
+        if exists("wlp"+str(i)+"s" + str(i)) == "wlp"+str(i)+"s"+str(i):
+            wlan.append(exists("wlp"+str(i)+"s"+str(i)))
+    
+    print("Wireless cards detected: ")
     for n in wlan:
-        print(n + " Found")
+        print(n)
     print("")
+    return wlan
 
 def set_mode(mode, iface):
     if mode == "monitor":
-        #subprocess.run(["airmon-ng", "check", "kill"])
-        #subprocess.run(["airmon-ng", "start", iface])
+        subprocess.run(["airmon-ng", "check", "kill"])
         subprocess.run(["ifconfig", "-s", iface, "down"])
         subprocess.run(["iwconfig", iface, "mode", "monitor"])
         subprocess.run(["ifconfig", "-s", iface, "up"])
